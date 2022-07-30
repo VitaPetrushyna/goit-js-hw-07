@@ -35,4 +35,13 @@ function createItemsGalleryMarcup(items) {
 function onOpenItem(evt) {
   evt.preventDefault();
   console.log(evt.target);
+  if (!evt.target.classList.contains("gallery__image")) {
+    return;
+  }
+  const imgEl = evt.target;
+  const instance = basicLightbox.create(`
+    <img src="${imgEl.dataset.source}" width="1200" height="1200">
+`);
+
+  instance.show();
 }
