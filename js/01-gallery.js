@@ -32,6 +32,17 @@ function createItemsGalleryMarcup(items) {
   //   console.log(marcup);
 }
 
+let instance;
+
+function onModalClose() {
+  instance.close();
+}
+
+function onCloseEsc(evt) {
+  if (evt.code === "Escape") {
+    onModalClose();
+  }
+}
 function onOpenItem(evt) {
   evt.preventDefault();
   console.log(evt.target);
@@ -39,9 +50,33 @@ function onOpenItem(evt) {
     return;
   }
   const imgEl = evt.target;
-  const instance = basicLightbox.create(`
-    <img src="${imgEl.dataset.source}" width="1200" height="1200">
-`);
-
+  let instance = basicLightbox.create(
+    `<img src="${imgEl.dataset.source}" width="1200" height="1200">`,
+    {
+      onShow: (instance) => {
+        window.addEventListener("keydown", onCloseEsc);
+      },
+      onClose: (instance) => {
+        window.removeEventListener("keydown", onCloseEsc);
+      },
+    }
+  );
   instance.show();
 }
+
+// const instance = basicLightbox.create(
+//   `
+//     <div class="modal">
+//         <p>A custom modal that has been styled independently. It's not part of basicLightbox, but perfectly shows its flexibility.</p>
+//         <input placeholder="Type something">
+//         <a>Close</a>
+//     </div>
+// `,
+//   {
+//     onShow: (instance) => {
+//       instance.element().querySelector("a").onclick = instance.close;
+//     },
+//   }
+// );
+
+// instance.show();
