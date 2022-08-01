@@ -19,3 +19,11 @@ function createItemsGalleryMarcup(items) {
     })
     .join("");
 }
+
+const lightbox = new SimpleLightbox(".gallery a", {
+  captions: true,
+  captionType: "attr",
+  captionsData: "alt",
+  captionPosition: "bottom",
+  captionDelay: 250,
+});
