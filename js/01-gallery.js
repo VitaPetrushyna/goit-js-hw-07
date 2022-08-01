@@ -32,17 +32,6 @@ function createItemsGalleryMarcup(items) {
   //   console.log(marcup);
 }
 
-let instance;
-
-function onModalClose() {
-  instance.close();
-}
-
-function onCloseEsc(evt) {
-  if (evt.code === "Escape") {
-    onModalClose();
-  }
-}
 function onOpenItem(evt) {
   evt.preventDefault();
   console.log(evt.target);
@@ -61,6 +50,13 @@ function onOpenItem(evt) {
       },
     }
   );
+
+  function onCloseEsc(evt) {
+    if (evt.code === "Escape") {
+      instance.close();
+    }
+  }
+
   instance.show();
 }
 
